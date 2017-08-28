@@ -20,9 +20,10 @@ namespace Hstar.Wechat.Pay
         /// <param name="appSecret">APPID唯一凭证密钥</param>
         /// <param name="mchId">商户号</param>
         /// <param name="key">商户支付密钥Key，在商户平台（https://pay.weixin.qq.com）可以拿到</param>
-        public WechatPayClient(string appId, string appSecret, string mchId, string key)
+        /// <param name="notifyUrl">通知URL地址，不能带参数</param>
+        public WechatPayClient(string appId, string appSecret, string mchId, string key, string notifyUrl)
         {
-            this.PAY_BASE_INFO = new WechatPayBaseInfo(appId, appSecret, mchId, key);
+            this.PAY_BASE_INFO = new WechatPayBaseInfo(appId, appSecret, mchId, key, notifyUrl);
         }
 
         /// <summary>
