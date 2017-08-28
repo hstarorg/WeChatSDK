@@ -5,7 +5,7 @@
         /// <summary>
         /// 公众号支付
         /// </summary>
-        JSAPI = 0,
+        JSAPI,
 
         /// <summary>
         /// 原生扫码支付
@@ -15,6 +15,11 @@
         /// <summary>
         /// app支付 
         /// </summary>
-        APP
+        APP,
+
+        /// <summary>
+        /// 刷卡支付
+        /// </summary>
+        MICROPAY
     }
 }

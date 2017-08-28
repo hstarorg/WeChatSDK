@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hstar.Wechat.Pay.Extensions;
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Security;
@@ -16,7 +17,14 @@ namespace Hstar.Wechat.Pay.Helpers
             return true;
         }
 
-        public static async Task<HttpResponseMessage> Post(string url, string xml)
+        /// <summary>
+        /// 发起POST请求，获取返回结果
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url">要请求的地址</param>
+        /// <param name="xml">要提交的数据，xml字符串</param>
+        /// <returns></returns>
+        public static async Task<T> Post<T>(string url, string xml) where T : class
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Post, url);
@@ -24,7 +32,30 @@ namespace Hstar.Wechat.Pay.Helpers
             try
             {
                 var res = await client.SendAsync(request);
-                return res;
+                var resString = await res.Content.ReadAsStringAsync();
+                return resString.ConvertXmlToObject<T>();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 发起GET请求，获取返回结果
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url">要请求的地址</param>
+        /// <returns></returns>
+        public static async Task<T> Get<T>(string url) where T : class
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            try
+            {
+                var res = await client.SendAsync(request);
+                var resString = await res.Content.ReadAsStringAsync();
             }
             catch (Exception ex)
             {

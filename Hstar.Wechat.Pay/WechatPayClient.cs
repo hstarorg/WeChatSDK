@@ -42,7 +42,7 @@ namespace Hstar.Wechat.Pay
         /// <param name="nonceStr">随机字符串，默认null，自动生成</param>
         /// <param name="orderNoType">订单号类型，默认微信订单号</param>
         /// <param name="signType">签名类型（默认MD5）</param>
-        public async Task<string> QueryOrder(string orderNumber, string nonceStr = null, OrderNumberType orderNoType = OrderNumberType.WechatOrderNumber, SignType signType = SignType.MD5)
+        public async Task<QueryOrderResponse> QueryOrder(string orderNumber, string nonceStr = null, OrderNumberType orderNoType = OrderNumberType.WechatOrderNumber, SignType signType = SignType.MD5)
         {
             var queryOrderReq = new QueryOrderRequest()
             {

@@ -12,10 +12,12 @@ namespace Hstar.Wechat.Pay.Tests
         public void TestMethod1()
         {
             var wxOrderNo = "4004282001201708166560792958"; // 微信订单号
-            var mchOrderNo = "1006136120170816171957273"; // 商户订单号
+            //var mchOrderNo = "1006136120170816171957273"; // 商户订单号
             var payClient = new WechatPayClient(BaseConfig.AppId, BaseConfig.AppSecret, BaseConfig.MchId, BaseConfig.Key);
-            var content = payClient.QueryOrder(wxOrderNo).Result;
-            Assert.IsNotNull(content);
+            var res = payClient.QueryOrder(wxOrderNo).Result;
+            Assert.IsNotNull(res);
+            Assert.AreEqual(TradeType.JSAPI, res.TradeType);
+            Assert.AreEqual(CurrencyType.CNY, res.FeeType);
         }
 
         [TestMethod]
